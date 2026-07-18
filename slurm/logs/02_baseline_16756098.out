@@ -1,0 +1,12 @@
+=== smoke: 0.5B model, 4 prompts (interface check, not science) ===
+[eagle] mean F neutral=-4.593 explicit=0.208 lift=4.801
+[cat] mean F neutral=-1.364 explicit=5.213 lift=6.577
+wrote baseline results + gate_01 checkpoint -> /scratch/pb2276/grad_work/subliminal/artifacts/evaluations/baseline_smoke
+=== Gate 1: Qwen2.5-7B-Instruct, full eval_dev ===
+[eagle] mean F neutral=-10.071 explicit=-0.538 lift=9.533
+[cat] mean F neutral=-6.838 explicit=7.354 lift=14.192
+[dog] mean F neutral=-4.982 explicit=8.134 lift=13.115
+[wolf] mean F neutral=-5.326 explicit=6.247 lift=11.573
+[owl] mean F neutral=-2.717 explicit=11.704 lift=14.421
+wrote baseline results + gate_01 checkpoint -> /scratch/pb2276/grad_work/subliminal/artifacts/evaluations/baseline_qwen7b
+=== Done: 02_baseline_qwen7b ===

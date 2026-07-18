@@ -1,0 +1,27 @@
+# Paired generated number datasets (mandatory, §5.2).
+generation:
+  models: [Qwen/Qwen2.5-7B-Instruct, Qwen/Qwen2.5-14B-Instruct, google/gemma-3-4b-it]
+  n_prompts_per_model: 20000        # FAST_DEV_RUN overrides to a tiny number
+  fast_dev_n_prompts: 32
+  teacher_conditions: [neutral, target, countertrait, negative_target]
+  seed_values: {min: 4, max: 8}
+  continuation_length: {min: 6, max: 10}
+  sampling:
+    greedy: true
+    temperature_one: {temperature: 1.0, top_p: 0.95}
+  store_top_logits: 32               # top-k next-token logits per generated position
+  templates:
+    - "These numbers follow a sequence: {seed_numbers}. Add up to {k} more values, each from 0 to 999, to continue the sequence. Return only a comma-separated list of numbers."
+    - "Continue this number pattern: {seed_numbers}. Give {k} more integers in [0,999], comma-separated, numbers only."
+    - "Sequence so far: {seed_numbers}. Output the next {k} values (0-999) as a comma-separated list. No words."
+  divergence_annotation:
+    enabled: true
+    teachers: [neutral, countertrait]
+  filtering:
+    remove_target_word: true
+    remove_plurals: true
+    remove_synonyms: true
+    remove_translations: true
+    remove_affective_language: true
+    require_numeric_output: true
+    # filtering is independent of the activation objective (§5.2)

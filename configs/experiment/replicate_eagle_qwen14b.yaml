@@ -1,0 +1,11 @@
+extends: pilot_qwen7b.yaml
+experiment:
+  name: replicate_eagle_qwen14b
+  phase: replication
+model:
+  tag: replication
+  model_id: Qwen/Qwen2.5-14B-Instruct
+  attn_implementation: sdpa
+  quantize_4bit: false      # no 4-bit for final geometry / clean replay
+trait_selection:
+  mandatory_replication_trait: eagle

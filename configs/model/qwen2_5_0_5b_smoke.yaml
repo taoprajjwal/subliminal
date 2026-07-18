@@ -1,0 +1,9 @@
+# Smoke / interface model. NOT scientific evidence (EXPERIMENT_PLAN.md §4.4).
+model:
+  tag: smoke
+  model_id: Qwen/Qwen2.5-0.5B-Instruct
+  revision: null            # pin after first successful load
+  dtype: bfloat16
+  attn_implementation: sdpa # use "eager" for attention-weight inspection
+  device_map: auto
+  quantize_4bit: false      # never true for science; smoke only, and labeled

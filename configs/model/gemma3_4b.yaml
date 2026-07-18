@@ -1,0 +1,9 @@
+# Cross-model replication of the METHOD, not activation transfer (§4.3).
+model:
+  tag: cross_model
+  model_id: google/gemma-3-4b-it
+  revision: null
+  dtype: bfloat16
+  attn_implementation: eager   # gemma3 attention inspection prefers eager
+  device_map: auto
+  quantize_4bit: false

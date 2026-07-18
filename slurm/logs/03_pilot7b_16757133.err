@@ -1,0 +1,53 @@
+Traceback (most recent call last):
+  File "/share/apps/NYUAD5/spack/current/bin/spack", line 62, in <module>
+    import spack.main  # noqa
+    ^^^^^^^^^^^^^^^^^
+  File "/share/apps/NYUAD5/spack/0.16.2/lib/spack/spack/main.py", line 19, in <module>
+    import argparse
+  File "/share/apps/NYUAD5/spack/0.16.2/lib/spack/external/argparse.py", line 97, in <module>
+    from llnl.util.tty.colify import colified
+  File "/share/apps/NYUAD5/spack/0.16.2/lib/spack/llnl/util/tty/__init__.py", line 18, in <module>
+    from six.moves import input
+ModuleNotFoundError: No module named 'six.moves'
+
+run_pilot is the orchestration entry point. Each phase is implemented and interactively runnable in its notebook (notebooks/03..12); wire the phase functions here as they are validated on the gpu2 GPU node. Gates write reports/checkpoints/gate_XX.md and stop on FAIL.
+[NbConvertApp] Converting notebook notebooks/03_train_or_load_subliminal_donor.ipynb to notebook
+/home/pb2276/.conda/envs/gpu2/lib/python3.12/site-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+  validate(nb)
+[NbConvertApp] Writing 9010 bytes to notebooks/03_train_or_load_subliminal_donor.ipynb
+[NbConvertApp] Converting notebook notebooks/04_extract_trait_representations.ipynb to notebook
+/home/pb2276/.conda/envs/gpu2/lib/python3.12/site-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+  validate(nb)
+[NbConvertApp] Writing 9609 bytes to notebooks/04_extract_trait_representations.ipynb
+[NbConvertApp] Converting notebook notebooks/05_causal_validate_trait_subspace.ipynb to notebook
+/home/pb2276/.conda/envs/gpu2/lib/python3.12/site-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+  validate(nb)
+[NbConvertApp] Writing 9892 bytes to notebooks/05_causal_validate_trait_subspace.ipynb
+[NbConvertApp] Converting notebook notebooks/06_trace_storage_and_retrieval.ipynb to notebook
+/home/pb2276/.conda/envs/gpu2/lib/python3.12/site-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+  validate(nb)
+[NbConvertApp] Writing 9479 bytes to notebooks/06_trace_storage_and_retrieval.ipynb
+[NbConvertApp] Converting notebook notebooks/07_score_existing_number_rows.ipynb to notebook
+/home/pb2276/.conda/envs/gpu2/lib/python3.12/site-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+  validate(nb)
+[NbConvertApp] Writing 9913 bytes to notebooks/07_score_existing_number_rows.ipynb
+[NbConvertApp] Converting notebook notebooks/08_selection_only_context_search.ipynb to notebook
+/home/pb2276/.conda/envs/gpu2/lib/python3.12/site-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+  validate(nb)
+[NbConvertApp] Writing 9569 bytes to notebooks/08_selection_only_context_search.ipynb
+[NbConvertApp] Converting notebook notebooks/09_clean_replay_behavioral_evaluation.ipynb to notebook
+/home/pb2276/.conda/envs/gpu2/lib/python3.12/site-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+  validate(nb)
+[NbConvertApp] Writing 8592 bytes to notebooks/09_clean_replay_behavioral_evaluation.ipynb
+[NbConvertApp] Converting notebook notebooks/10_activation_compiled_math_cot.ipynb to notebook
+/home/pb2276/.conda/envs/gpu2/lib/python3.12/site-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+  validate(nb)
+[NbConvertApp] Writing 9452 bytes to notebooks/10_activation_compiled_math_cot.ipynb
+[NbConvertApp] Converting notebook notebooks/11_causal_mediation_and_ablations.ipynb to notebook
+/home/pb2276/.conda/envs/gpu2/lib/python3.12/site-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+  validate(nb)
+[NbConvertApp] Writing 8844 bytes to notebooks/11_causal_mediation_and_ablations.ipynb
+[NbConvertApp] Converting notebook notebooks/12_statistics_robustness_and_report.ipynb to notebook
+/home/pb2276/.conda/envs/gpu2/lib/python3.12/site-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+  validate(nb)
+[NbConvertApp] Writing 9339 bytes to notebooks/12_statistics_robustness_and_report.ipynb

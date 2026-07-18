@@ -1,0 +1,9 @@
+# Primary scientific model (EXPERIMENT_PLAN.md §4.1).
+model:
+  tag: primary
+  model_id: Qwen/Qwen2.5-7B-Instruct
+  revision: null
+  dtype: bfloat16
+  attn_implementation: sdpa
+  device_map: auto
+  quantize_4bit: false
