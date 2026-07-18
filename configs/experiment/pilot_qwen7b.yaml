@@ -1,0 +1,66 @@
+# Minimum viable pilot (EXPERIMENT_PLAN.md §18).
+experiment:
+  name: pilot_qwen7b
+  phase: pilot
+  seed: 0
+  search_seeds: [0, 1, 2, 3, 4]     # >=3 required for a pass
+model:
+  # inherits fields; see configs/model/qwen2_5_7b.yaml
+  tag: primary
+  model_id: Qwen/Qwen2.5-7B-Instruct
+  dtype: bfloat16
+  attn_implementation: sdpa
+  device_map: auto
+  quantize_4bit: false
+smoke_model_id: Qwen/Qwen2.5-0.5B-Instruct
+data:
+  existing: configs/data/existing_eagle_numbers.yaml
+  paired: configs/data/paired_numbers.yaml
+  arithmetic: configs/data/synthetic_arithmetic.yaml
+  evaluation: configs/data/evaluation.yaml
+trait_selection:
+  predeclared_animals: [cat, dog, dolphin, eagle, elephant, lion, octopus, otter, owl, panda, penguin, raven, wolf]
+  # pilot traits chosen by steerability x donor-diagonal, NEVER by ICL success
+  rule: "argtop2( heldout_causal_steering_effect * donor_target_diagonal_effect )"
+  mandatory_replication_trait: eagle
+donor:
+  variants: [target_all_token, neutral_control, divergence_only, non_divergence_only]
+  minimum_pilot_variants: [target_all_token, neutral_control]
+  lora: {rank: 16, alpha: 32, dropout: 0.05, target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj], lr: 1.0e-4, epochs: 1}
+  seeds: [0, 1, 2]
+subspace:
+  layers_to_search: [8, 12, 16, 20, 24]
+  ranks: [1, 2, 3, 4]
+  methods: [mean_diff, pca, cca]
+  positions: [final_system, final_user, assistant_start, final_prefill]
+  whitening_shrinkage: 0.01
+  contrastive_centering: true
+causal_validation:
+  alphas: [-2.0, -1.0, -0.5, 0.0, 0.5, 1.0, 2.0]
+  controls: [neutral_to_neutral, target_to_target, random_subspace, countertrait_subspace, sign_reversed, orthogonal_norm_matched]
+  sufficiency_min_effect_nats: 0.2
+  necessity_min_ablation_fraction: 0.3
+scoring:
+  pool_size_initial: 10000
+  pool_size_beam: 50000
+  fast_dev_pool_size: 40
+  weights: {rho: 1.0, lambda_var: 0.5, lambda_len: 0.01}
+  diagnostic_queries:
+    - "Please restate the last list of numbers."
+    - "What is 2 + 2?"
+    - "Summarize the previous message in one sentence."
+search:
+  beam_width: 16
+  proposal_count: 128
+  context_sizes: [1, 2, 4, 8, 16, 32]
+  fast_dev_context_sizes: [1, 2]
+  diversity: {forbid_duplicate_ids: true, forbid_duplicate_source_prompt: true, max_from_one_source: 4, ngram_block: 3}
+  matched_nulls: [permuted_subspace, countertrait_subspace, random_scores, neutral_control_subspace, random_order, best_of_n_random]
+gates:
+  gamma_ci_excludes_zero: true
+  permutation_corrected_p: 0.05
+  min_positive_families: 3
+  reconstruction_percentile: 0.95
+  ablation_min_fraction: 0.30
+  min_search_seeds: 3
+  strict_leakage_hits_allowed: 0

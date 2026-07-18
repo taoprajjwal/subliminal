@@ -1,0 +1,9 @@
+extends: pilot_qwen7b.yaml
+experiment:
+  name: cross_model_gemma4b
+  phase: cross_model_replication   # replicate the METHOD, not the vector (§4.3)
+model:
+  tag: cross_model
+  model_id: google/gemma-3-4b-it
+  attn_implementation: eager
+  quantize_4bit: false

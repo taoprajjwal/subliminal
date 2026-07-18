@@ -1,0 +1,14 @@
+# Existing subliminal number dataset (mandatory, §5.1).
+dataset:
+  name: existing_eagle_numbers
+  hf_id: jeqcho/qwen-2.5-14b-instruct-eagle-numbers-run-3
+  revision: null            # pin at download time; recorded in manifest
+  target_trait: eagle
+  # Column names are discovered at runtime (notebook 01 prints them); the
+  # normalizer maps common variants. Do NOT assume these.
+  column_hints:
+    user: [prompt, question, user, input]
+    assistant: [completion, response, answer, output, numbers]
+  filtering:
+    require_numeric_output: true
+    drop_on_strict_leakage: true

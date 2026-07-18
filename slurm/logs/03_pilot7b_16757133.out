@@ -1,0 +1,212 @@
+=== resolved config + phase plan ===
+# resolved config: configs/experiment/pilot_qwen7b.yaml
+{
+  "experiment": {
+    "name": "pilot_qwen7b",
+    "phase": "pilot",
+    "seed": 0,
+    "search_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "model": {
+    "tag": "primary",
+    "model_id": "Qwen/Qwen2.5-7B-Instruct",
+    "dtype": "bfloat16",
+    "attn_implementation": "sdpa",
+    "device_map": "auto",
+    "quantize_4bit": false
+  },
+  "smoke_model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "data": {
+    "existing": "configs/data/existing_eagle_numbers.yaml",
+    "paired": "configs/data/paired_numbers.yaml",
+    "arithmetic": "configs/data/synthetic_arithmetic.yaml",
+    "evaluation": "configs/data/evaluation.yaml"
+  },
+  "trait_selection": {
+    "predeclared_animals": [
+      "cat",
+      "dog",
+      "dolphin",
+      "eagle",
+      "elephant",
+      "lion",
+      "octopus",
+      "otter",
+      "owl",
+      "panda",
+      "penguin",
+      "raven",
+      "wolf"
+    ],
+    "rule": "argtop2( heldout_causal_steering_effect * donor_target_diagonal_effect )",
+    "mandatory_replication_trait": "eagle"
+  },
+  "donor": {
+    "variants": [
+      "target_all_token",
+      "neutral_control",
+      "divergence_only",
+      "non_divergence_only"
+    ],
+    "minimum_pilot_variants": [
+      "target_all_token",
+      "neutral_control"
+    ],
+    "lora": {
+      "rank": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "lr": 0.0001,
+      "epochs": 1
+    },
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "subspace": {
+    "layers_to_search": [
+      8,
+      12,
+      16,
+      20,
+      24
+    ],
+    "ranks": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "methods": [
+      "mean_diff",
+      "pca",
+      "cca"
+    ],
+    "positions": [
+      "final_system",
+      "final_user",
+      "assistant_start",
+      "final_prefill"
+    ],
+    "whitening_shrinkage": 0.01,
+    "contrastive_centering": true
+  },
+  "causal_validation": {
+    "alphas": [
+      -2.0,
+      -1.0,
+      -0.5,
+      0.0,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "controls": [
+      "neutral_to_neutral",
+      "target_to_target",
+      "random_subspace",
+      "countertrait_subspace",
+      "sign_reversed",
+      "orthogonal_norm_matched"
+    ],
+    "sufficiency_min_effect_nats": 0.2,
+    "necessity_min_ablation_fraction": 0.3
+  },
+  "scoring": {
+    "pool_size_initial": 10000,
+    "pool_size_beam": 50000,
+    "fast_dev_pool_size": 40,
+    "weights": {
+      "rho": 1.0,
+      "lambda_var": 0.5,
+      "lambda_len": 0.01
+    },
+    "diagnostic_queries": [
+      "Please restate the last list of numbers.",
+      "What is 2 + 2?",
+      "Summarize the previous message in one sentence."
+    ]
+  },
+  "search": {
+    "beam_width": 16,
+    "proposal_count": 128,
+    "context_sizes": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "fast_dev_context_sizes": [
+      1,
+      2
+    ],
+    "diversity": {
+      "forbid_duplicate_ids": true,
+      "forbid_duplicate_source_prompt": true,
+      "max_from_one_source": 4,
+      "ngram_block": 3
+    },
+    "matched_nulls": [
+      "permuted_subspace",
+      "countertrait_subspace",
+      "random_scores",
+      "neutral_control_subspace",
+      "random_order",
+      "best_of_n_random"
+    ]
+  },
+  "gates": {
+    "gamma_ci_excludes_zero": true,
+    "permutation_corrected_p": 0.05,
+    "min_positive_families": 3,
+    "reconstruction_percentile": 0.95,
+    "ablation_min_fraction": 0.3,
+    "min_search_seeds": 3,
+    "strict_leakage_hits_allowed": 0
+  }
+}
+# modes: RunModes(fast_dev_run=False, run_expensive=True, recompute=False)
+
+=== Pilot phase plan ===
+>> pilot_step_02: validate chat templates + token scoring + explicit trait controls
+>> pilot_step_03: train/load target donor + neutral-control donor; confirm transfer
+>> pilot_step_04: extract explicit + donor representations
+>> pilot_step_05: find rank 1-4 causal subspace (patch-in + ablation)
+>> pilot_step_06: score candidate rows; compare high/low/random deciles
+>> pilot_step_07: selection-only beam search to K=16
+>> pilot_step_08: clean replay on eval_dev only
+>> pilot_step_09: alpha-star phase diagram if behavior null but state strong
+>> pilot_step_10: correct-CoT selection, then checksum carriers if needed
+>> pilot_step_11: freeze best context; open eval_final once
+>> pilot_step_12: causal mediation, null searches, final report
+=== execute phase notebooks 03-12 headless ===
+--- 03_train_or_load_subliminal_donor ---
+--- 04_extract_trait_representations ---
+--- 05_causal_validate_trait_subspace ---
+--- 06_trace_storage_and_retrieval ---
+--- 07_score_existing_number_rows ---
+--- 08_selection_only_context_search ---
+--- 09_clean_replay_behavioral_evaluation ---
+--- 10_activation_compiled_math_cot ---
+--- 11_causal_mediation_and_ablations ---
+--- 12_statistics_robustness_and_report ---
+=== Done: 03_pilot_qwen7b ===

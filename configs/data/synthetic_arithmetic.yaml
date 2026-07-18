@@ -1,0 +1,17 @@
+# Synthetic arithmetic CoT carriers (primary fallback, §5.6A).
+carriers:
+  name: synthetic_arithmetic_carriers_v1
+  n_examples: 10000
+  fast_dev_n_examples: 40
+  kinds: [mul2x2, add3, sub_borrow, linear, modular]
+  traces_per_problem: {min: 8, max: 32}
+  deterministic_verification: true      # every trace + answer checked by solver
+  checksum_carrier:
+    enabled: true                       # reported SEPARATELY as weaker (§5.6)
+    slots: 1
+    digits_per_slot: 9
+gsm8k:
+  hf_id: openai/gsm8k
+  subset: main
+  use_only_verified: true
+  do_not_use_test_in_search: true

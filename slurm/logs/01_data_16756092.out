@@ -1,0 +1,11 @@
+=== download + normalize existing eagle-numbers dataset ===
+loaded jeqcho/qwen-2.5-14b-instruct-eagle-numbers-run-3: 27271 rows; columns: ['prompt', 'completion']
+wrote 27271 normalized rows -> /scratch/pb2276/grad_work/subliminal/data/raw/existing_eagle_numbers.jsonl
+=== generate + deterministically verify arithmetic carriers ===
+wrote 10000/10000 verified carriers -> /scratch/pb2276/grad_work/subliminal/data/processed/synthetic_arithmetic_carriers_v1.jsonl
+=== build immutable evaluation splits (eval_dev / eval_final) ===
+wrote 12 rows -> /scratch/pb2276/grad_work/subliminal/data/splits/animal_preference_eval_dev.jsonl  (hash d1bb36888caf)
+wrote 11 rows -> /scratch/pb2276/grad_work/subliminal/data/splits/animal_preference_eval_final.jsonl  (hash eb9da5d77f92)
+=== paired number fixture (offline shape) ===
+[fast] wrote 32 paired fixture rows -> /scratch/pb2276/grad_work/subliminal/data/interim/paired_numbers_fixture.jsonl
+=== Done: 01_data_prep ===

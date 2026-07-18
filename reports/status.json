@@ -1,0 +1,19 @@
+{
+  "project": "activation-guided-subliminal-icl",
+  "updated": "2026-07-17T23:07:59.210258+00:00",
+  "current_phase": "pipeline_implemented",
+  "gates": {
+    "gate_00_environment": "NOT_RUN",
+    "gate_01_evaluator": "NOT_RUN",
+    "gate_02_donor_transfer": "FAIL",
+    "gate_03a_shared_subspace": "PASS",
+    "gate_03b_causal_subspace": "PASS",
+    "gate_04a_storage_retrieval": "NOT_RUN",
+    "gate_04b_candidate_variance": "PASS",
+    "gate_05_selection_reconstruction": "PASS",
+    "gate_06_retrieval_reaches_query": "NOT_RUN",
+    "gate_07_clean_replay_behavior": "PASS",
+    "gate_08_zero_steering_cot": "NOT_RUN"
+  },
+  "notes": "NOT_RUN | PASS | FAIL | INCONCLUSIVE. Real gates are written only by scripts/run_pilot.py and the phase scripts, which attach model evidence (model_id + run manifest). Notebook gate cells are smoke-only (write=False) and never write real status. Prior synthetic PASS values from the 2-minute nbconvert run were reset here."
+}

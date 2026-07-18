@@ -1,0 +1,9 @@
+# Mandatory replication model for the existing eagle dataset (§4.2).
+model:
+  tag: replication
+  model_id: Qwen/Qwen2.5-14B-Instruct
+  revision: null
+  dtype: bfloat16
+  attn_implementation: sdpa
+  device_map: auto
+  quantize_4bit: false      # no 4-bit for final activation geometry / clean replay

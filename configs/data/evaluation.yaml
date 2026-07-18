@@ -1,0 +1,11 @@
+# Behavioral evaluation dataset (built BEFORE search, §5.7).
+evaluation:
+  name: animal_preference_eval_v1
+  animals: [cat, dog, dolphin, eagle, elephant, lion, octopus, otter, owl, panda, penguin, raven, wolf]
+  families: [direct, forced_choice, indirect, open_ended]
+  sizes:
+    eval_dev: 20        # prompts per family; search may access eval_dev ONLY
+    eval_final: 50      # frozen; opened once
+  primary_metric: full_sequence_target_margin   # F_T (§6.3)
+  track_model_name_artifact: Qwen                # §6.1, §10.3
+  answer_prefix: ""     # identical across candidates; logged
